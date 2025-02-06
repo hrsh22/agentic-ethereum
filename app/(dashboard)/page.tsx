@@ -2,6 +2,31 @@ import { Button } from '@/components/ui/button';
 import { Calendar, Users, Sparkles, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
+// Use a fixed date for featured events to avoid hydration issues
+const featuredEvents = [
+  {
+    id: 1,
+    name: "Virtual Tech Conference 1",
+    date: "April 15, 2024",
+    description: "Join us for an exciting day of innovation and networking",
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+  },
+  {
+    id: 2,
+    name: "Virtual Tech Conference 2",
+    date: "April 20, 2024",
+    description: "Join us for an exciting day of innovation and networking",
+    image: "https://images.unsplash.com/photo-1531498860502-7c67cf02f657?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+  },
+  {
+    id: 3,
+    name: "Virtual Tech Conference 3",
+    date: "April 25, 2024",
+    description: "Join us for an exciting day of innovation and networking",
+    image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+  }
+];
+
 export default function HomePage() {
   return (
     <main className="bg-white">
@@ -98,23 +123,20 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <Link href={`/events/${item}`} key={item}>
+            {featuredEvents.map((event) => (
+              <Link href={`/events/${event.id}`} key={event.id}>
                 <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
                   <img
-                    src={`https://picsum.photos/seed/${item}/400/250`}
-                    alt="Event"
+                    src={event.image}
+                    alt={event.name}
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-6">
                     <div className="text-sm text-blue-600 font-semibold mb-2">
-                      {new Date(Date.now() + item * 86400000).toLocaleDateString('en-US', {
-                        month: 'long',
-                        day: 'numeric'
-                      })}
+                      {event.date}
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">Virtual Tech Conference {item}</h3>
-                    <p className="text-gray-600 mb-4">Join us for an exciting day of innovation and networking</p>
+                    <h3 className="text-xl font-semibold mb-2">{event.name}</h3>
+                    <p className="text-gray-600 mb-4">{event.description}</p>
                   </div>
                 </div>
               </Link>
