@@ -1,6 +1,8 @@
+'use client';
 import { Button } from '@/components/ui/button';
 import { Calendar, Users, Sparkles, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useAccount } from 'wagmi';
 
 // Use a fixed date for featured events to avoid hydration issues
 const featuredEvents = [
@@ -28,6 +30,8 @@ const featuredEvents = [
 ];
 
 export default function HomePage() {
+  const { address } = useAccount();
+  console.log("ADDRESS: ", address)
   return (
     <main className="bg-white">
       {/* Hero Section */}
@@ -45,13 +49,13 @@ export default function HomePage() {
               </p>
               <div className="mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
                 <Link href="/events/create">
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full text-lg px-8 py-6">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-black rounded-full text-lg">
                     Create your event
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
                 <Link href="/events">
-                  <Button variant="outline" className="rounded-full text-lg px-8 py-6">
+                  <Button variant="outline" className="rounded-full text-lg">
                     Explore events
                   </Button>
                 </Link>
@@ -155,7 +159,7 @@ export default function HomePage() {
             Join thousands of event creators who trust our platform
           </p>
           <Link href="/events/create">
-            <Button className="bg-white text-blue-600 hover:bg-gray-100 rounded-full text-lg px-8 py-6">
+            <Button className="bg-white text-blue-600 hover:bg-gray-100 rounded-full text-lg">
               Get started for free
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
